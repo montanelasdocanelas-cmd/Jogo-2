@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pergunta Especial</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffeef0;
+            overflow: hidden; /* Impede scroll enquanto o botão foge */
+        }
+
+        h1 {
+            color: #d63384;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #btn-sim {
+            background-color: #28a745;
+            color: white;
+        }
+
+        #btn-nao {
+            background-color: #dc3545;
+            color: white;
+            position: absolute; /* Essencial para o movimento */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Queres ir jantar comigo hoje? ❤️</h1>
+
+    <div class="buttons">
+        <button id="btn-sim" onclick="vitoria()">SIM</button>
+        <button id="btn-nao">NÃO</button>
+    </div>
+
+    <script>
+        const btnNao = document.getElementById("btn-nao");
+
+        // Função que move o botão para um lugar aleatório
+        function foge() {
+            // Largura e altura máxima disponível no ecrã do telemóvel
+            const maxX = window.innerWidth - btnNao.offsetWidth;
+            const maxY = window.innerHeight - btnNao.offsetHeight;
+
+            // Gera coordenadas aleatórias
+            const newX = Math.floor(Math.random() * maxX);
+            const newY = Math.floor(Math.random() * maxY);
+
+            btnNao.style.left = newX + "px";
+            btnNao.style.top = newY + "px";
+        }
+
+        // No mobile, usamos o 'touchstart'
+        btnNao.addEventListener("touchstart", (e) => {
+            e.preventDefault(); // Impede o clique real de acontecer
+            foge();
+        });
+
+        // Também deixamos o 'mouseover' caso abras no PC
+        btnNao.addEventListener("mouseover", foge);
+
+        function vitoria() {
+    alert("Sabia que ias dizer que sim! Preparada? 😍");
+
+    const link = document.createElement('a');
+    
+    // O nome simplificado do ficheiro que está no GitHub
+    link.href = 'musica.mp3'; 
+    
+    // O nome que aparecerá no telemóvel quando ela descarregar
+    link.download = 'musica.mp3'; 
+    
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+    </script>
+</body>
+</html>
